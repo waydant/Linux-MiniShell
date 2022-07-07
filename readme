@@ -1,0 +1,125 @@
+Name - Vedant Gaurang Shah
+Roll No. - 200101115:
+
+Program written in C language
+meant to be compiled like gcc 200101115_Assign02.c
+and excecuted by ./a.out
+
+OVERVIEW
+--------
+when executed the shell starts with a "welcome to my mini shell" 
+on the next line user name and then the present working directory is printed, waiting for input from the user
+like 
+user: /home/user/Desktop $> 
+
+Assumptions :
+The User must enter all words with space apart.
+e.g. sentenv TERM = vt100
+also in redirection, appending and piping...
+ >, <  , >> & | should be space separated from the rest text.
+ e.g. echo hello world > output
+
+ (
+     NOTE : echo hello world >output is not valid command
+            cat input |grep hello is also not valid command
+ )
+
+
+COMMANDS IMPLEMENTED :
+
+Internal Commands 
+-----------------
+
+history:
+outputs all the history of commands written before          // history file is temporarily created in the same folder as the ./a.out folder and this folder is visible when 'ls' command is run. the history file gets removed once the program gets exited
+
+exit:
+exits from the mini shell and removes the history file created before
+
+pwd:
+when command is only 'pwd' then the present working directorys path is printed
+
+cd:
+when commanded as "cd Directory1" , it changes the directory to Directory1
+only "cd" brings to home directory
+"cd .." brings back two parent directory 
+
+ls:
+only "ls" prints lists all files and directory in  the current directory.
+extra feature supported for ls:
+ls -l : prints the files & directories all in new line
+ls -a : prints the hidden files as well
+
+help:
+this prints this same README file for help for the valid commands and the syntax used
+
+
+
+External Commands
+-----------------
+
+all external commands are available 
+many are coded by myself like :
+date
+touch
+clear (or cls)
+cat
+rm
+dir
+rmdir
+mv
+
+and the rest external commands are covered by exec command:
+like:
+shutdown
+which
+chsh
+wheris
+apropos
+more
+less
+script
+find
+chmod
+
+
+
+ENVIRONMENT VARIABLES
+---------------------
+
+printenv TYPE
+this command prints ( or gets) the environment variable TYPE.this command is alias to getenv so  getenv command is not explicitly implemented
+
+setenv TERM = vt100
+this sets a new TERM as environment variable and assings it value vt100. when prompted with printenv TERM, it outputs vt100
+space between each word is mandatory. ALSO THE EQUAL TO SIGN (=) should be space separated, or else this wont work.
+For saftey purpose the setenv doesnt overwrite any pre=existing env var.
+
+unsetenv TERM
+this will remove the set environment variable name TERM.(if it exists)
+
+
+REDIRECTION AND PIPING
+---------------------
+
+using < redirects the input to the next file pointed after '<'
+using >> appends the ouput to the next file pointed after '>>'
+using > redirects the output to the next file pointed after '>'
+
+e.g.
+./a.out < input > output
+[NOTE the SPACE is REQUIRED]
+similarly
+./a.out < input >> output
+this will append to output file
+
+pipe ( | )
+this command also requires space between | .
+assumption only 1 pipe is handled, multiple pipes cannot be handled ( as told by prof via mail )
+this pipes the output of commands on left of pipe and inputs it as input of right of pipe commands.
+e.g.
+cat input | grep hello
+cat input | wc
+cat input | head -5
+cat input | tail -4
+[NOTE THE SPACE RQUIRED]
